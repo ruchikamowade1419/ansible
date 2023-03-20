@@ -2,9 +2,9 @@
 
 ## Assignment
 
-1. Create an Ansible playbook to install HashiCorp Terraform and Vault on a Linux OS.
+1. Create an Ansible Playbook to install HashiCorp Terraform and Vault on a Linux OS.
     - Bonus: Check for existing installation/s.
-2. Provide step/s to test the playbook **locally**.
+2. Provide step/s to test the Playbook **locally**.
     - Bonus: Leverage a unit testing framework.
 3. Create an Ansible Task inside of a Role which runs an AWS command with arguments as key-value pairs. The Task should define a default key-value pair and allow the caller (i.e. Playbook) to override the defaults.
 E.g.:
