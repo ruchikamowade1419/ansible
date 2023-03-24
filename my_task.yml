@@ -1,0 +1,16 @@
+---
+- name: Run AWS command
+  hosts: all
+  become: true
+  vars:
+    aws_command: "aws s3 ls"
+    aws_args:
+      region: "ap-south-1"
+  tasks:
+    - name: Run AWS command with arguments
+      shell: "{{ aws_command }} {% for k,v in aws_args.items() %}--{{ k }} {{ v }} {% endfor %}"
+      register: aws_output
+    - name: Debug AWS output
+      debug:
+        var: aws_output.stdout_lines
+

@@ -1,0 +1,41 @@
+---
+- name: Install Terraform and Vault on Ubuntu
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: Update package lists
+      apt:
+        update_cache: yes
+
+    - name: Install dependencies
+      apt:
+        name: ['curl', 'unzip']
+        state: latest
+
+    - name: Download Terraform binary
+      get_url:
+        url: https://releases.hashicorp.com/terraform/1.1.4/terraform_1.1.4_linux_amd64.zip
+        dest: /tmp/terraform.zip
+
+    - name: Extract Terraform binary
+      unarchive:
+        src: /tmp/terraform.zip
+        dest: /usr/local/bin/
+        remote_src: yes
+        creates: /usr/local/bin/terraform
+
+    - name: Download Vault binary
+      get_url:
+        url: https://releases.hashicorp.com/vault/1.8.2/vault_1.8.2_linux_amd64.zip
+        dest: /tmp/vault.zip
+
+    - name: Extract Vault binary
+      unarchive:
+        src: /tmp/vault.zip
+        dest: /usr/local/bin/
+        remote_src: yes
+        creates: /usr/local/bin/vault
+
+    - name: Verify installation
+      command: /usr/local/bin/terraform -version && /usr/local/bin/vault -version
+
